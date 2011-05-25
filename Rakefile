@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "dynamic_models"
   gem.homepage = "http://github.com/craigulliott/dynamic_models"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = "Adds some methods to ActionController to build models dynamically"
+  gem.description = "Methods to get and build models directly from parameters.  Useful for DRYing up code, specifically very dynamic code for things like admin tools."
   gem.email = "craigulliott@gmail.com"
   gem.authors = ["Craig Ulliott"]
   # dependencies defined in Gemfile

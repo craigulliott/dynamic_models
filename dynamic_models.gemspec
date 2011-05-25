@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "dynamic_models.gemspec",
     "lib/dynamic_models.rb",
     "test/helper.rb",
     "test/test_dynamic_models.rb"

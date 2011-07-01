@@ -4,7 +4,7 @@ module DynamicModels
   def parent_model
     params.each do |name, value|
       if name =~ /(.+)_id$/
-        return @parent_model ||= $1.pluralize.classify.constantize.find(value)
+        return @parent_model ||= $1.camelize.constantize.find(value)
       end
     end
     nil
@@ -17,14 +17,14 @@ module DynamicModels
   
   # returns a new model, it can be set with an optional hash
   def new_model(defaults = {})
-    new_model = model_name.classify.constantize.new(defaults)
+    new_model = model_name.camelize.constantize.new(defaults)
     new_model.send("#{parent_model.class.name.downcase}=", parent_model) if parent_model
     return new_model
   end
 
   # returns a model using the id from the params
   def fetch_model
-    model_name.classify.constantize.find( params[:id] )
+    model_name.camelize.constantize.find( params[:id] )
   end
 
   # returns an array of models (using the name of this controller)
@@ -32,7 +32,7 @@ module DynamicModels
     if parent_model
       return parent_model.send("#{model_name.pluralize.downcase}")
     else
-      return model_name.classify.constantize.find(:all)
+      return model_name.camelize.constantize.find(:all)
     end
   end
 

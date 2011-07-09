@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{dynamic_models}
-  s.version = "0.1.1"
+  s.version = "0.1.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Craig Ulliott"]
-  s.date = %q{2011-07-01}
+  s.date = %q{2011-07-08}
   s.description = %q{Methods to get and build models directly from parameters.  Useful for DRYing up code, specifically very dynamic code for things like admin tools.}
   s.email = %q{craigulliott@gmail.com}
   s.extra_rdoc_files = [

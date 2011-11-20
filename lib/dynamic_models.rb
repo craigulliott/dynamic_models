@@ -14,11 +14,19 @@ module DynamicModels
   def model_name
     params[:controller].split('/').last.singularize
   end
+
+  # plural form of the model name from the controller
+  def plural_model_name
+    params[:controller].split('/').last
+  end
   
   # returns a new model, it can be set with an optional hash
   def new_model(defaults = {})
-    new_model = model_name.camelize.constantize.new(defaults)
-    new_model.send("#{parent_model.class.name.underscore}=", parent_model) if parent_model
+    if parent_model
+      new_model = parent_model.send(plural_model_name).build(defaults)
+    else
+      new_model = model_name.camelize.constantize.new(defaults)
+    end
     return new_model
   end
 

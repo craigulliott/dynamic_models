@@ -4,14 +4,14 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{dynamic_models}
-  s.version = "0.1.2"
+  s.name = "dynamic_models"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Craig Ulliott"]
-  s.date = %q{2011-07-08}
-  s.description = %q{Methods to get and build models directly from parameters.  Useful for DRYing up code, specifically very dynamic code for things like admin tools.}
-  s.email = %q{craigulliott@gmail.com}
+  s.date = "2011-11-20"
+  s.description = "Methods to get and build models directly from parameters.  Useful for DRYing up code, specifically very dynamic code for things like admin tools."
+  s.email = "craigulliott@gmail.com"
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
@@ -29,11 +29,11 @@ Gem::Specification.new do |s|
     "test/helper.rb",
     "test/test_dynamic_models.rb"
   ]
-  s.homepage = %q{http://github.com/craigulliott/dynamic_models}
+  s.homepage = "http://github.com/craigulliott/dynamic_models"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.6.2}
-  s.summary = %q{Adds some methods to ActionController to build models dynamically}
+  s.rubygems_version = "1.8.10"
+  s.summary = "Adds some methods to ActionController to build models dynamically"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3

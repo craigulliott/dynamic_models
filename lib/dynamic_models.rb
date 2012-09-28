@@ -19,7 +19,7 @@ module DynamicModels
 
   # model name from the controller or type parameter (for a model which is using STI)
   def model_name
-    sti_model? ? params[:type].camelize.constantize : params[:controller].split('/').last.singularize
+    sti_model? ? params[:type].underscore : params[:controller].split('/').last.singularize
   end
 
   # the model class, inferred from the controller

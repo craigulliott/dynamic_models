@@ -1,3 +1,5 @@
+require 'dynamic_model_active_record_extensions'
+
 module DynamicModels
 
   # looks for object_id notation, and returns a new model
@@ -10,9 +12,28 @@ module DynamicModels
     nil
   end
 
-  # model name from the controller
+  # if we are using a type parameter, then we are dealing with an STI model
+  def sti_model?
+    params[:type].present?
+  end
+
+  # model name from the controller or type parameter (for a model which is using STI)
   def model_name
-    params[:controller].split('/').last.singularize
+    sti_model? ? params[:type].camelize.constantize : params[:controller].split('/').last.singularize
+  end
+
+  # the model class, inferred from the controller
+  def base_model_class
+    params[:controller].split('/').last.singularize.camelize.constantize
+  end
+
+  # the class we are working with, if an STI model then it will fail loudly on a type which inst descendant from the class which corresponds to this controller
+  def model_class
+    klass = model_name.camelize.constantize
+    if sti_model?
+      raise "you can only pass a type which descends from #{params[:controller]}" unless klass.sti_model? and klass.parent == base_model_class
+    end
+    klass
   end
 
   # plural form of the model name from the controller
@@ -33,14 +54,14 @@ module DynamicModels
         raise "can't find association #{model_name} or #{plural_model_name} for #{parent_model.class.name}"
       end
     else
-      new_model = model_name.camelize.constantize.new(defaults)
+      new_model = model_class.new(defaults)
     end
     return new_model
   end
 
   # returns a model using the id from the params
   def fetch_model
-    model_name.camelize.constantize.find( params[:id] )
+    model_class.find params[:id]
   end
 
   # returns an array of models (using the name of this controller)
@@ -48,7 +69,7 @@ module DynamicModels
     if parent_model
       return parent_model.send("#{model_name.pluralize.downcase}")
     else
-      return model_name.camelize.constantize.find(:all)
+      return model_class.find(:all)
     end
   end
 
@@ -57,3 +78,8 @@ end
 class ActionController::Base
   include DynamicModels
 end
+
+class ActiveRecord::Base
+  include DynamicModelActiveRecordExtensions
+end
+

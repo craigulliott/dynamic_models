@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "dynamic_models"
-  s.version = "0.3.2"
+  s.version = "0.4.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Craig Ulliott"]
-  s.date = "2011-12-07"
+  s.date = "2012-09-28"
   s.description = "Methods to get and build models directly from parameters.  Useful for DRYing up code, specifically very dynamic code for things like admin tools."
   s.email = "craigulliott@gmail.com"
   s.extra_rdoc_files = [
@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "dynamic_models.gemspec",
+    "lib/dynamic_model_active_record_extensions.rb",
     "lib/dynamic_models.rb",
     "test/helper.rb",
     "test/test_dynamic_models.rb"
@@ -32,7 +33,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/craigulliott/dynamic_models"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.10"
+  s.rubygems_version = "1.8.24"
   s.summary = "Adds some methods to ActionController to build models dynamically"
 
   if s.respond_to? :specification_version then

@@ -43,20 +43,13 @@ module DynamicModels
   
   # returns a new model, it can be set with an optional hash
   def new_model(defaults = {})
+    new_model = model_class.new(defaults)
+    # is there is a parent then associate it with the model
     if parent_model
-      # is it a has_many
-      if parent_model.respond_to?(plural_model_name)
-        new_model = parent_model.send(plural_model_name).build(defaults)
-      # is is a has_one
-      elsif parent_model.respond_to?(model_name)
-        new_model = parent_model.send("build_#{model_name}", defaults)
-      else
-        raise "can't find association #{model_name} or #{plural_model_name} for #{parent_model.class.name}"
-      end
-    else
-      new_model = model_class.new(defaults)
+      new_model.send(parent_model.class.name.downcase, parent_model)
     end
-    return new_model
+    # return the new model
+    new_model
   end
 
   # returns a model using the id from the params

@@ -19,12 +19,16 @@ module DynamicModels
 
   # model name from the controller or type parameter (for a model which is using STI)
   def model_name
-    sti_model? ? params[:type].underscore : params[:controller].split('/').last.singularize
+    sti_model? ? params[:type].underscore : base_model_class_name
   end
 
   # the model class, inferred from the controller
+  def base_model_class_name
+    params[:controller].split('/').last.singularize
+  end
+
   def base_model_class
-    params[:controller].split('/').last.singularize.camelize.constantize
+    base_model_class_name.camelize.constantize
   end
 
   # the class we are working with, if an STI model then it will fail loudly on a type which inst descendant from the class which corresponds to this controller

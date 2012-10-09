@@ -44,9 +44,9 @@ module DynamicModels
   # returns a new model, it can be set with an optional hash
   def new_model(defaults = {})
     new_model = model_class.new(defaults)
-    # is there is a parent then associate it with the model
+    # if there is a parent then associate it with the model
     if parent_model
-      new_model.send(parent_model.class.name.downcase, parent_model)
+      new_model.send("#{parent_model.class.name.downcase}=", parent_model)
     end
     # return the new model
     new_model

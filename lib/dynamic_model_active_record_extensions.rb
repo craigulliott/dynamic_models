@@ -10,7 +10,7 @@ module DynamicModelActiveRecordExtensions
 
   # for creating routes which are based on the parent class
   def sti_parent_class
-    self.class.parent
+    self.class.superclass
   end
 
   module ClassMethods
@@ -22,7 +22,7 @@ module DynamicModelActiveRecordExtensions
 
     # for creating routes which are based on the parent class
     def sti_parent_class
-      self.parent
+      self.superclass
     end
 
   end

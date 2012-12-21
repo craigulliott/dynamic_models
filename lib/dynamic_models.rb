@@ -35,7 +35,7 @@ module DynamicModels
   def model_class
     klass = model_name.camelize.constantize
     if sti_model?
-      raise "you can only pass a type which descends from #{params[:controller]}" unless klass.sti_model? and klass.parent == base_model_class
+      raise "you can only pass a type which descends from #{params[:controller]}" unless klass.sti_model? and klass.superclass == base_model_class
     end
     klass
   end

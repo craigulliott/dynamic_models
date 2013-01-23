@@ -34,9 +34,6 @@ module DynamicModels
   # the class we are working with, if an STI model then it will fail loudly on a type which inst descendant from the class which corresponds to this controller
   def model_class
     klass = model_name.camelize.constantize
-    if sti_model?
-      raise "you can only pass a type which descends from #{params[:controller]}" unless klass.sti_model? and klass.superclass == base_model_class
-    end
     klass
   end
 
